@@ -182,6 +182,7 @@ check_and_disable_jvm_stats() {
   fi
 }
 
+
 # Function to check if specific ports are in use
 check_ports_in_use() {
   echo "Checking if ports 21212, 21211, 8080, 3021, 5555, 7181 are in use..."
