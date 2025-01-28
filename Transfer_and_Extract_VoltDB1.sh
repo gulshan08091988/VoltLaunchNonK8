@@ -11,13 +11,13 @@ read -p "Enter your choice (1 or 2): " choice
 
 # Gather necessary input based on the choice
 if [ "$choice" -eq 1 ]; then
-    read -p "Enter the public IP addresses of the VMs (comma separated): " vm_ips
     read -p "Enter the username for SSH login: " username
+    read -p "Enter the public IP addresses of the VMs (comma separated): " vm_ips
     read -s -p "Enter the SSH password: " password
     echo ""
 elif [ "$choice" -eq 2 ]; then
-    read -p "Enter the public IP addresses of the VMs (comma separated): " vm_ips
     read -p "Enter the username for SSH login: " username
+    read -p "Enter the public IP addresses of the VMs (comma separated): " vm_ips
     read -p "Enter the path to the SSH private key: " private_key_path
     echo ""
 else
@@ -40,7 +40,7 @@ if [[ ! -f "$voltdb_binary_name" ]]; then
     exit 1
 fi
 
-# Loop through the provided VM IPs and transfer, extract, and check VoltDB binary
+# Loop through the provided VM IPs and transfer and extract VoltDB binary
 IFS=',' read -r -a ips <<< "$vm_ips"
 
 for ip in "${ips[@]}"; do
@@ -59,14 +59,6 @@ for ip in "${ips[@]}"; do
 
     if [ $? -eq 0 ]; then
         echo "VoltDB binary successfully transferred and extracted on $ip."
-
-        # Execute the `voltdb check` command
-        echo "Running './bin/voltdb check' on $ip..."
-        if [ "$choice" -eq 1 ]; then
-            sshpass -p "$password" ssh "$username@$ip" "cd $remote_dir/$(basename $voltdb_binary_name .tar.gz) && ./bin/voltdb check"
-        elif [ "$choice" -eq 2 ]; then
-            ssh -i "$private_key_path" "$username@$ip" "cd $remote_dir/$(basename $voltdb_binary_name .tar.gz) && ./bin/voltdb check"
-        fi
     else
         echo "Error occurred while transferring or extracting VoltDB binary on $ip."
     fi

@@ -11,13 +11,13 @@ read -p "Enter your choice (1 or 2): " choice
 
 # Gather necessary input based on the choice
 if [ "$choice" -eq 1 ]; then
-    read -p "Enter the username for SSH login: " username
     read -p "Enter the public IP addresses of the VMs (comma separated): " vm_ips
+    read -p "Enter the username for SSH login: " username
     read -s -p "Enter the SSH password: " password
     echo ""
 elif [ "$choice" -eq 2 ]; then
-    read -p "Enter the username for SSH login: " username
     read -p "Enter the public IP addresses of the VMs (comma separated): " vm_ips
+    read -p "Enter the username for SSH login: " username
     read -p "Enter the path to the SSH private key: " private_key_path
     echo ""
 else

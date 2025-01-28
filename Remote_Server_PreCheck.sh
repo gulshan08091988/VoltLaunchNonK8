@@ -231,7 +231,7 @@ read -p "Enter your choice (1 or 2): " choice
 if [ "$choice" -eq 1 ]; then
   echo "You have selected to log in via SSH with password authentication."
   read -p "Enter the Public IP Addresses of the VMs (comma separated): " ip_addresses
-  read -p "Enter the Username: " username
+  read -p "Enter the username for SSH login: " username
   read -sp "Enter the Password: " password
   echo
 
@@ -244,7 +244,7 @@ if [ "$choice" -eq 1 ]; then
 elif [ "$choice" -eq 2 ]; then
   echo "You have selected to log in via SSH with key authentication."
   read -p "Enter the Public IP Addresses of the VMs (comma separated): " ip_addresses
-  read -p "Enter the Username: " username
+  read -p "Enter the username for SSH login: " username
   read -p "Enter the Path to Your SSH Private Key: " ssh_key
 
   # Loop through all IP addresses
